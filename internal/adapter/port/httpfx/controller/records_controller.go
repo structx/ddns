@@ -83,6 +83,7 @@ func (rc *Records) Upsert(w http.ResponseWriter, r *http.Request) {
 		record = &domain.CName{}
 	default:
 		render.Render(w, r, ErrInvalidRequest(errors.New("invalid record type provided")))
+		return
 	}
 
 	err = rc.service.AddOrUpdateRecord(r.Context(), record)
