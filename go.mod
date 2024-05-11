@@ -4,6 +4,7 @@ go 1.22.2
 
 require (
 	github.com/go-chi/chi/v5 v5.0.12
+	github.com/go-chi/render v1.0.1
 	github.com/structx/go-dpkg v0.0.0-00010101000000-000000000000
 	go.uber.org/fx v1.21.1
 	go.uber.org/multierr v1.10.0

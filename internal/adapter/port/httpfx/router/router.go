@@ -4,6 +4,7 @@ package router
 import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/render"
 	"moul.io/chizap"
 
 	"go.uber.org/zap"
@@ -26,10 +27,11 @@ func New(logger *zap.Logger, ddns domain.DDNS) *chi.Mux {
 		WithUserAgent: true,
 	}))
 	r.Use(middleware.Recoverer)
+	r.Use(render.SetContentType(render.ContentTypeJSON))
 
 	cc := []interface{}{
 		dpkg.NewBundle(logger),
-		controller.NewDDNS(logger, ddns),
+		controller.NewRecords(logger, ddns),
 	}
 
 	v1 := chi.NewRouter()
