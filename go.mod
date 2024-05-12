@@ -1,14 +1,17 @@
-module githhub.com/structx/ddns
+module github.com/structx/ddns
 
 go 1.22.2
 
 require (
 	github.com/go-chi/chi/v5 v5.0.12
 	github.com/go-chi/render v1.0.1
-	github.com/structx/go-dpkg v0.0.0-00010101000000-000000000000
+	github.com/golang/protobuf v1.5.2
+	github.com/structx/go-dpkg v0.0.9
 	go.uber.org/fx v1.21.1
 	go.uber.org/multierr v1.10.0
 	go.uber.org/zap v1.27.0
+	google.golang.org/grpc v1.53.0
+	google.golang.org/protobuf v1.28.1
 	moul.io/chizap v1.0.3
 )
 
@@ -19,7 +22,6 @@ require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/go-chi/chi v1.5.4 // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/hashicorp/hcl/v2 v2.20.1 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.2-0.20181231171920-c182affec369 // indirect
@@ -38,8 +40,4 @@ require (
 	golang.org/x/text v0.13.0 // indirect
 	golang.org/x/tools v0.14.0 // indirect
 	google.golang.org/genproto v0.0.0-20230227214838-9b19f0bdc514 // indirect
-	google.golang.org/grpc v1.53.0 // indirect
-	google.golang.org/protobuf v1.28.1 // indirect
 )
-
-replace github.com/structx/go-dpkg => github.com/structx/go-pkg v0.0.8

@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.12.4
-// source: proto/ddns/v1/ddns_service.proto
+// source: proto/ddns/ddns_service.proto
 
-package ddns_v1
+package v1
 
 import (
 	context "context"
@@ -38,7 +38,7 @@ func NewDDNSServiceV1Client(cc grpc.ClientConnInterface) DDNSServiceV1Client {
 
 func (c *dDNSServiceV1Client) Ping(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PingResponse, error) {
 	out := new(PingResponse)
-	err := c.cc.Invoke(ctx, "/ddns.DDNSServiceV1/Ping", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ddns.v1.DDNSServiceV1/Ping", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func (c *dDNSServiceV1Client) Ping(ctx context.Context, in *PingRequest, opts ..
 
 func (c *dDNSServiceV1Client) Store(ctx context.Context, in *StoreRequest, opts ...grpc.CallOption) (*StoreResponse, error) {
 	out := new(StoreResponse)
-	err := c.cc.Invoke(ctx, "/ddns.DDNSServiceV1/Store", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ddns.v1.DDNSServiceV1/Store", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (c *dDNSServiceV1Client) Store(ctx context.Context, in *StoreRequest, opts 
 
 func (c *dDNSServiceV1Client) FindNode(ctx context.Context, in *FindNodeRequest, opts ...grpc.CallOption) (*FindNodeResponse, error) {
 	out := new(FindNodeResponse)
-	err := c.cc.Invoke(ctx, "/ddns.DDNSServiceV1/FindNode", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ddns.v1.DDNSServiceV1/FindNode", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ func (c *dDNSServiceV1Client) FindNode(ctx context.Context, in *FindNodeRequest,
 
 func (c *dDNSServiceV1Client) FindValue(ctx context.Context, in *FindValueRequest, opts ...grpc.CallOption) (*FindValueResponse, error) {
 	out := new(FindValueResponse)
-	err := c.cc.Invoke(ctx, "/ddns.DDNSServiceV1/FindValue", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ddns.v1.DDNSServiceV1/FindValue", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -122,7 +122,7 @@ func _DDNSServiceV1_Ping_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ddns.DDNSServiceV1/Ping",
+		FullMethod: "/ddns.v1.DDNSServiceV1/Ping",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DDNSServiceV1Server).Ping(ctx, req.(*PingRequest))
@@ -140,7 +140,7 @@ func _DDNSServiceV1_Store_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ddns.DDNSServiceV1/Store",
+		FullMethod: "/ddns.v1.DDNSServiceV1/Store",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DDNSServiceV1Server).Store(ctx, req.(*StoreRequest))
@@ -158,7 +158,7 @@ func _DDNSServiceV1_FindNode_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ddns.DDNSServiceV1/FindNode",
+		FullMethod: "/ddns.v1.DDNSServiceV1/FindNode",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DDNSServiceV1Server).FindNode(ctx, req.(*FindNodeRequest))
@@ -176,7 +176,7 @@ func _DDNSServiceV1_FindValue_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ddns.DDNSServiceV1/FindValue",
+		FullMethod: "/ddns.v1.DDNSServiceV1/FindValue",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DDNSServiceV1Server).FindValue(ctx, req.(*FindValueRequest))
@@ -188,7 +188,7 @@ func _DDNSServiceV1_FindValue_Handler(srv interface{}, ctx context.Context, dec 
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var DDNSServiceV1_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "ddns.DDNSServiceV1",
+	ServiceName: "ddns.v1.DDNSServiceV1",
 	HandlerType: (*DDNSServiceV1Server)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -209,5 +209,5 @@ var DDNSServiceV1_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/ddns/v1/ddns_service.proto",
+	Metadata: "proto/ddns/ddns_service.proto",
 }

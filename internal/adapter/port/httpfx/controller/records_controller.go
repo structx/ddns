@@ -8,7 +8,7 @@ import (
 	"github.com/go-chi/render"
 	"go.uber.org/zap"
 
-	"githhub.com/structx/ddns/internal/core/domain"
+	"github.com/structx/ddns/internal/core/domain"
 )
 
 // Records
@@ -35,8 +35,8 @@ func (rc *Records) RegisterRoutesV1(r chi.Router) {
 	r.Mount("/records", rr)
 }
 
-// UpsertRecordPayload
-type UpsertRecordPayload struct {
+// RecordPayload
+type RecordPayload struct {
 	RecordType string `json:"record_type"`
 	Root       string `json:"root"`
 	Content    string `json:"content"`
@@ -45,7 +45,7 @@ type UpsertRecordPayload struct {
 
 // UpsertRecordParams
 type UpsertRecordParams struct {
-	Payload *UpsertRecordPayload `json:"payload"`
+	Payload *RecordPayload `json:"payload"`
 }
 
 // Render
@@ -58,19 +58,31 @@ func (up *UpsertRecordParams) Bind(r *http.Request) error {
 	return nil
 }
 
-// RecordPayload
-type RecordPayload struct{}
-
 // UpsertRecordResponse
-type UpsertRecordResponse struct{}
+type UpsertRecordResponse struct {
+	Payload *RecordPayload `json:"payload"`
+}
+
+// Render
+func (upr *UpsertRecordResponse) Render(w http.ResponseWriter, r *http.Request) error {
+	w.WriteHeader(http.StatusCreated)
+	return nil
+}
+
+// NewUpsertRecordResponse
+func NewUpsertRecordResponse(payload *RecordPayload) *UpsertRecordResponse {
+	return &UpsertRecordResponse{Payload: payload}
+}
 
 // Upsert
 func (rc *Records) Upsert(w http.ResponseWriter, r *http.Request) {
 
+	ctx := r.Context()
+
 	var params UpsertRecordParams
 	err := render.Bind(r, &params)
 	if err != nil {
-		render.Render(w, r, ErrInvalidRequest(err))
+		_ = render.Render(w, r, ErrInvalidRequest(err))
 		return
 	}
 
@@ -78,18 +90,20 @@ func (rc *Records) Upsert(w http.ResponseWriter, r *http.Request) {
 
 	switch params.Payload.RecordType {
 	case "A":
-		record = &domain.A{}
+		record = domain.NewARecord(params.Payload.Root, params.Payload.Content, params.Payload.TTL)
 	case "CNAME":
-		record = &domain.CName{}
+		record = domain.NewCNameRecord(params.Payload.Root, params.Payload.Content, params.Payload.TTL)
 	default:
-		render.Render(w, r, ErrInvalidRequest(errors.New("invalid record type provided")))
+		_ = render.Render(w, r, ErrInvalidRequest(errors.New("invalid record type provided")))
 		return
 	}
 
-	err = rc.service.AddOrUpdateRecord(r.Context(), record)
+	err = rc.service.AddOrUpdateRecord(ctx, record)
 	if err != nil {
 		rc.log.Errorf("unable to add or update record %v", err)
-		render.Render(w, r, ErrInternalServerError)
+		_ = render.Render(w, r, ErrInternalServerError)
 		return
 	}
+
+	_ = render.Render(w, r, NewUpsertRecordResponse(params.Payload))
 }

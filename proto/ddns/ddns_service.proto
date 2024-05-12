@@ -1,9 +1,9 @@
 
 syntax = "proto3";
 
-option go_package = "github.com/structx/ddns/proto/ddns.v1";
+option go_package = "github.com/structx/ddns/proto/ddns/v1";
 
-package ddns;
+package ddns.v1;
 
 import "google/protobuf/timestamp.proto";
 

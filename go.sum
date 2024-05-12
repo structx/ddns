@@ -218,8 +218,8 @@ github.com/stretchr/testify v1.4.0/go.mod h1:j7eGeouHqKxXV5pUuKE4zz7dFj8WfuZ+81P
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=
 github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
-github.com/structx/go-pkg v0.0.8 h1:VP0SJRdwPZYAK1OQNFFSkqLwpTn4gleFEOkitwWsV/Y=
-github.com/structx/go-pkg v0.0.8/go.mod h1:EeJ47U+CPWFW8v7yAGYqS7SaEGqM77+oqKmT6581ejU=
+github.com/structx/go-dpkg v0.0.9 h1:buBTjAqOBub7pvFJRqffDdNO8oyunak1WgA+60mlFRY=
+github.com/structx/go-dpkg v0.0.9/go.mod h1:EeJ47U+CPWFW8v7yAGYqS7SaEGqM77+oqKmT6581ejU=
 github.com/tailscale/depaware v0.0.0-20210622194025-720c4b409502/go.mod h1:p9lPsd+cx33L3H9nNoecRRxPssFKUwwI50I3pZ0yT+8=
 github.com/yuin/goldmark v1.1.25/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.1.27/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=

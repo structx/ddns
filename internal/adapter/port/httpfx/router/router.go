@@ -11,8 +11,8 @@ import (
 
 	dpkg "github.com/structx/go-dpkg/adapter/port/http/controller"
 
-	"githhub.com/structx/ddns/internal/adapter/port/httpfx/controller"
-	"githhub.com/structx/ddns/internal/core/domain"
+	"github.com/structx/ddns/internal/adapter/port/httpfx/controller"
+	"github.com/structx/ddns/internal/core/domain"
 )
 
 // New chi router constructor
@@ -39,13 +39,11 @@ func New(logger *zap.Logger, ddns domain.DDNS) *chi.Mux {
 	for _, c1 := range cc {
 
 		if c, ok := c1.(dpkg.V0); ok {
-			h := c.RegisterRoutesV0()
-			r.Mount("/", h)
+			c.RegisterRoutesV0(r)
 		}
 
 		if c, ok := c1.(dpkg.V1); ok {
-			h := c.RegisterRoutesV1()
-			v1.Mount("/", h)
+			c.RegisterRoutesV1(v1)
 		}
 	}
 

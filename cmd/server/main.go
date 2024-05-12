@@ -14,9 +14,9 @@ import (
 	dpkg "github.com/structx/go-dpkg/domain"
 	"github.com/structx/go-dpkg/util/decode"
 
-	"githhub.com/structx/ddns/internal/adapter/port/httpfx/router"
-	"githhub.com/structx/ddns/internal/core/domain"
-	"githhub.com/structx/ddns/internal/core/service"
+	"github.com/structx/ddns/internal/adapter/port/httpfx/router"
+	"github.com/structx/ddns/internal/core/domain"
+	"github.com/structx/ddns/internal/core/service"
 )
 
 func main() {

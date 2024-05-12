@@ -29,6 +29,15 @@ type A struct {
 	ttl     int64
 }
 
+// NewARecord
+func NewARecord(root, content string, ttl int64) *A {
+	return &A{
+		root:    root,
+		content: content,
+		ttl:     ttl,
+	}
+}
+
 // GetType
 func (a *A) GetType() RecordEnum {
 	return ARecord
@@ -54,6 +63,15 @@ type CName struct {
 	root    string
 	content string
 	ttl     int64
+}
+
+// NewCNameRecord
+func NewCNameRecord(root, content string, ttl int64) *CName {
+	return &CName{
+		root:    root,
+		content: content,
+		ttl:     ttl,
+	}
 }
 
 // GetType
