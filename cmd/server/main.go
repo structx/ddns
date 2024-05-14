@@ -35,7 +35,8 @@ func main() {
 	).Run()
 }
 
-func registerHooks(lc fx.Lifecycle, s1 *http.Server) error {
+func registerHooks(lc fx.Lifecycle, s1 *http.Server, s2 *rpcfx.GRPCServer) error {
+
 	lc.Append(
 		fx.Hook{
 			OnStart: func(ctx context.Context) error {
@@ -48,6 +49,11 @@ func registerHooks(lc fx.Lifecycle, s1 *http.Server) error {
 					}
 				}()
 
+				err := s2.Start()
+				if err != nil {
+					result = multierr.Append(result, fmt.Errorf("failed to start gRPC server %v", err))
+				}
+
 				return result
 			},
 			OnStop: func(ctx context.Context) error {
@@ -58,6 +64,9 @@ func registerHooks(lc fx.Lifecycle, s1 *http.Server) error {
 				if err != nil {
 					result = multierr.Append(result, fmt.Errorf("unable to shutdown http server %v", err))
 				}
+
+				// graceful gRPC shutdown
+				s2.Shutdown()
 
 				return result
 			},

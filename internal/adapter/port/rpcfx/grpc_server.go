@@ -7,6 +7,7 @@ import (
 	"net"
 
 	"go.uber.org/zap"
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -21,6 +22,7 @@ type GRPCServer struct {
 
 	log     *zap.SugaredLogger
 	service domain.DDNS
+	srv     *grpc.Server
 }
 
 // NewGRPCServer
@@ -28,6 +30,7 @@ func NewGRPCServer(logger *zap.Logger, ddns domain.DDNS) *GRPCServer {
 	return &GRPCServer{
 		log:     logger.Sugar().Named("GrpcServer"),
 		service: ddns,
+		srv:     nil,
 	}
 }
 
@@ -121,4 +124,28 @@ func (g *GRPCServer) FindValue(ctx context.Context, in *pbv1.FindValueRequest) (
 	return &pbv1.FindValueResponse{
 		Echo: &pbv1.Echo{},
 	}, nil
+}
+
+// Start
+func (g *GRPCServer) Start() error {
+
+	g.srv = grpc.NewServer()
+	pbv1.RegisterDDNSServiceV1Server(g.srv, g)
+
+	listener, err := net.Listen("tcp", net.JoinHostPort(g.service.GetHost(), fmt.Sprintf("%d", g.service.GetPort())))
+	if err != nil {
+		return fmt.Errorf("failed to create network listener %v", err)
+	}
+
+	go func() {
+		if err := g.srv.Serve(listener); err != nil {
+			g.log.Fatalf("failed to start gRPC server %v", err)
+		}
+	}()
+	return nil
+}
+
+// Shutdown
+func (g *GRPCServer) Shutdown() {
+	g.srv.GracefulStop()
 }

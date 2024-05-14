@@ -32,4 +32,8 @@ type DDNS interface {
 	Echo(ctx context.Context) *Echo
 	// NodeLookup
 	NodeLookup(ctx context.Context, nodeID []byte) ([]*Bucket, error)
+	// GetHost
+	GetHost() string
+	// GetPort
+	GetPort() int64
 }

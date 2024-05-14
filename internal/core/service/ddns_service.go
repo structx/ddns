@@ -135,6 +135,16 @@ func (dd *DDNS) Echo(ctx context.Context) *domain.Echo {
 	}
 }
 
+// GetHost
+func (dd *DDNS) GetHost() string {
+	return dd.ip
+}
+
+// GetPort
+func (dd *DDNS) GetPort() int64 {
+	return dd.port
+}
+
 func transformLevelBucketSlice(s []*dpkg.Bucket) []*domain.Bucket {
 
 	bucketslice := make([]*domain.Bucket, len(s))
