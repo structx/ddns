@@ -1,1 +1,11 @@
 vendor/
+*.tfstate
+*.tfstate.backup
+.terraform/backend.tf
+.terraform/backend.tf.backup
+.terraform.lock
+.terraform.lock.hcl
+*.tfvars
+*.tfenv
+logs/*
+.terraform/

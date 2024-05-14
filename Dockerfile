@@ -14,6 +14,4 @@ COPY --from=builder /usr/bin/ /app/bin/
 
 VOLUME [ "/var/lib/ddns", "/var/log/ddns", "/local/ddns", "/opt/ddns/raft" ]
 
-EXPOSE 50051 8080
-
 ENTRYPOINT [ "/app/bin/server" ]
