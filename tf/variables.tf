@@ -1,10 +1,4 @@
 
-variable app_name {
-    type = string
-    default = "daisy"
-    description = "application name"
-}
-
 variable "container_http_port" {
     type = number
     default = 8081

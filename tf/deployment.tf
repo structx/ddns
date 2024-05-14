@@ -1,9 +1,9 @@
 
 resource "kubernetes_deployment" "ddns" {
     metadata {
-        name = "ddns-deployment"
+        name = "development"
         labels = {
-            test = "DaisyApp"
+            test = "ddns"
         }
     }
 
@@ -12,21 +12,21 @@ resource "kubernetes_deployment" "ddns" {
 
         selector {
             match_labels = {
-              test = "DaisyApp"
+              test = "ddns"
             }
         }
 
         template {
             metadata {
               labels = {
-                test = "DaisyApp"
+                test = "ddns"
               }
             }
 
             spec {
                 container {
-                    image = "trevatk/daisy:v0.0.1"
-                    name = "daisy"
+                    image = "localhost:5000/structx/ddns:latest"
+                    name = "ddns"
 
                     env {
                       name = var.env_dservice_config_name

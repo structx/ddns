@@ -1,3 +1,4 @@
+// Package main server entrypoint
 package main
 
 import (
@@ -15,6 +16,7 @@ import (
 	"github.com/structx/go-dpkg/util/decode"
 
 	"github.com/structx/ddns/internal/adapter/port/httpfx/router"
+	"github.com/structx/ddns/internal/adapter/port/rpcfx"
 	"github.com/structx/ddns/internal/core/domain"
 	"github.com/structx/ddns/internal/core/service"
 )
@@ -27,6 +29,7 @@ func main() {
 		fx.Provide(logging.New),
 		fx.Provide(fx.Annotate(service.NewDDNS, fx.As(new(domain.DDNS)))),
 		fx.Provide(fx.Annotate(router.New, fx.As(new(http.Handler)))),
+		fx.Provide(rpcfx.NewGRPCServer),
 		fx.Provide(serverfx.New),
 		fx.Invoke(registerHooks),
 	).Run()

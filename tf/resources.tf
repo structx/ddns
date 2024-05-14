@@ -1,7 +1,7 @@
 
 resource "kubernetes_persistent_volume_claim" "ddns" {
     metadata {
-        name = "ddns-logs"
+        name = "ddns"
     }
     spec {
         access_modes = ["ReadWriteMany"]
@@ -16,7 +16,7 @@ resource "kubernetes_persistent_volume_claim" "ddns" {
 
 resource "kubernetes_persistent_volume" "ddns" {
     metadata {
-        name = "ddns-logs"
+        name = "ddns"
     }
     spec {
         capacity = {

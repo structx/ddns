@@ -98,7 +98,7 @@ func (rc *Records) Upsert(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = rc.service.AddOrUpdateRecord(ctx, record)
+	_, err = rc.service.AddOrUpdateRecord(ctx, record)
 	if err != nil {
 		rc.log.Errorf("unable to add or update record %v", err)
 		_ = render.Render(w, r, ErrInternalServerError)

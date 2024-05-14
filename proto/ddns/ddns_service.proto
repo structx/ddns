@@ -19,7 +19,7 @@ message Sender {
     google.protobuf.Timestamp requested_at = 2;
 }
 
-message Response {
+message Echo {
     string ip = 1;
     int64 port = 2;
     bytes node_id = 3;
@@ -31,7 +31,7 @@ message PingRequest {
 }
 
 message PingResponse {
-    Response response = 1;
+    Echo echo = 1;
 }
 
 message StoreRequest {
@@ -41,7 +41,7 @@ message StoreRequest {
 }
 
 message StoreResponse {
-    Response response = 1;
+    Echo echo = 1;
 }
 
 message FindNodeRequest {
@@ -55,11 +55,12 @@ message KContact {
 }
 
 message KBucket {
-    repeated KContact contact_list = 1;
+    bytes node_id = 1;
+    repeated KContact contact_list = 2;
 }
 
 message FindNodeResponse {
-    Response response = 1;
+    Echo echo = 1;
     repeated KBucket bucket_list = 2;
 }
 
@@ -68,5 +69,5 @@ message FindValueRequest {
 }
 
 message FindValueResponse {
-    Response response = 1;
+    Echo echo = 1;
 }
